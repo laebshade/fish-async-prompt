@@ -136,6 +136,10 @@ and begin
     end
 
     function __async_prompt_pid
-        echo %self
+        if test -n "$pid"
+            echo $pid
+        else
+            cat /proc/self/stat | awk '{ print $4 }'
+        end
     end
 end
